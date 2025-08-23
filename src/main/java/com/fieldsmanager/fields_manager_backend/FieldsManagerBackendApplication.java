@@ -15,10 +15,4 @@ public class FieldsManagerBackendApplication {
 	}
 
 
-    @GetMapping
-    public String SayHello() {
-        return "Hello World!";
-    }
-
-
 }
