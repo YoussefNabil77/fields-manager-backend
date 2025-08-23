@@ -1,36 +1,31 @@
 package com.fieldsmanager.fields_manager_backend.service;
-
 import com.fieldsmanager.fields_manager_backend.repository.UserRepository;
-
 import com.fieldsmanager.fields_manager_backend.entity.User;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-
+import org.springframework.stereotype.Service;
 
 
+@Service
 public class UserService {
 
-    private UserRepository userRepository;
-    private  PasswordEncoder passwordEncoder;
+    // Spring will inject the repository automatically
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-    public User registerUser(String name, String email, String phone, String rawPassword) {
-        if (userRepository.existsByEmail(email)) {
-            throw new RuntimeException("Email already registered");
-        }
-        if (userRepository.existsByPhone(phone)) {
-            throw new RuntimeException("Phone already registered");
-        }
+    private  UserRepository userRepository;
 
+
+    public User registerUser(String name, String email, String phone, String password) {
         User user = User.builder()
                 .name(name)
                 .email(email)
                 .phone(phone)
-                .password(passwordEncoder.encode(rawPassword))
-                .role("PLAYER")  // default role
-                .status("ACTIVE") // default status
+                .password(password)
+                .role("PLAYER")
+                .status("ACTIVE")
                 .build();
 
         return userRepository.save(user);
     }
-
 }
+
