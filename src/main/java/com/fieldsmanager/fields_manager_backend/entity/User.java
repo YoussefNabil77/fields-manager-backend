@@ -1,8 +1,9 @@
 package com.fieldsmanager.fields_manager_backend.entity;
 
-
+//
 import jakarta.persistence.*;
 import lombok.*;
+
 
 @Entity
 @Table(name = "user")
@@ -30,4 +31,22 @@ public class User {
 
     private String role;
     private String status;
+
+    public User(String name, String email, String phone, String password, String role, String status) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.role = role;
+        this.status = status;
+    }
+    public User() {}
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }
