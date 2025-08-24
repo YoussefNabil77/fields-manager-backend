@@ -20,18 +20,18 @@ public class SignupRequest {
     private String password;
 
     public String getName() {
-        return null;
+        return name;
     }
 
     public String getEmail() {
-        return null;
+        return email;
     }
 
     public String getPhone() {
-        return null;
+        return phone;
     }
 
     public String getPassword() {
-        return null;
+        return password;
     }
 }
