@@ -4,6 +4,8 @@ package com.fieldsmanager.fields_manager_backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "user")
@@ -29,6 +31,8 @@ public class User {
 
     private String role;
     private String status;
+    private String resetCode;
+    private LocalDateTime resetCodeExpiry;
 
     public User(String name, String email, String phone, String password, String role, String status) {
         this.name = name;

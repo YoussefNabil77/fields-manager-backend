@@ -1,4 +1,6 @@
 package com.fieldsmanager.fields_manager_backend.controller;
+import com.fieldsmanager.fields_manager_backend.dto.ResetPasswordConfirmRequest;
+import com.fieldsmanager.fields_manager_backend.dto.ResetPasswordRequest;
 import com.fieldsmanager.fields_manager_backend.dto.SignupRequest;
 import com.fieldsmanager.fields_manager_backend.entity.User;
 import com.fieldsmanager.fields_manager_backend.repository.UserRepository;
@@ -36,6 +38,21 @@ public class UserController {
         return userRepository.findByEmail(email)  // <-- instance call
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
+    // Request Password Reset
+    @PostMapping("/reset-password/request")
+    public String requestPasswordReset(@RequestBody ResetPasswordRequest request) {
+        return userService.requestReset(request.getEmail());
+    }
 
+    // Confirm Password Reset
+    @PostMapping("/reset-password/confirm")
+    public String confirmPasswordReset(@RequestBody ResetPasswordConfirmRequest request) {
+        userService.confirmReset(
+                request.getEmail(),
+                request.getCode(),
+                request.getNewPassword()
+        );
+        return "Password updated successfully!";
+    }
 }
 
