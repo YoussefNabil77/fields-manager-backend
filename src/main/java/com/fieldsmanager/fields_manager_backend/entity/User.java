@@ -2,13 +2,13 @@ package com.fieldsmanager.fields_manager_backend.entity;
 
 //
 import jakarta.persistence.*;
-import lombok.*;
+//import lombok.*;
 
 
 @Entity
 @Table(name = "user")
-@Data
-@NoArgsConstructor
+//@Data
+//@NoArgsConstructor
 
 public class User {
 
@@ -39,7 +39,8 @@ public class User {
         this.status = status;
     }
 
-
+    public User() {
+    }
 
     public String getPassword() {
         return password;
