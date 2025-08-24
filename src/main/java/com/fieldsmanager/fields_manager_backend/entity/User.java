@@ -9,8 +9,6 @@ import lombok.*;
 @Table(name = "user")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 
 public class User {
 
@@ -40,7 +38,8 @@ public class User {
         this.role = role;
         this.status = status;
     }
-    public User() {}
+
+
 
     public String getPassword() {
         return password;
