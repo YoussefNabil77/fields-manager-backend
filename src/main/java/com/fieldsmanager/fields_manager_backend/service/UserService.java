@@ -1,20 +1,22 @@
 package com.fieldsmanager.fields_manager_backend.service;
+import com.fieldsmanager.fields_manager_backend.dto.UpdateProfileRequest;
 import com.fieldsmanager.fields_manager_backend.repository.UserRepository;
 import com.fieldsmanager.fields_manager_backend.entity.User;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-//
+import com.fieldsmanager.fields_manager_backend.dto.ResetPasswordRequest;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
-    // Spring will inject the repository automatically
+    private final UserRepository userRepository;
 
 
-    private  UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+
+    }
 
     public User registerUser(String name, String email, String phone, String password) {
         User user = new User(name, email, phone, password, "PLAYER", "ACTIVE");
@@ -46,10 +48,27 @@ public class UserService {
             throw new IllegalArgumentException("Invalid reset code");
         }
 
-        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setPassword(newPassword);
         user.setResetCode(null);
         user.setResetCodeExpiry(null);
         userRepository.save(user);
     }
 
+    public User updateProfile(String email, UpdateProfileRequest request) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (request.getName() != null) {
+            user.setName(request.getName());
+        }
+        if (request.getEmail() != null) {
+            user.setEmail(request.getEmail());
+        }
+        if (request.getPhone() != null) {
+            user.setPhone(request.getPhone());
+        }
+
+        return userRepository.save(user);
+    }
 }
+
