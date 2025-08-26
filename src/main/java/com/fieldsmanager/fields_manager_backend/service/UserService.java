@@ -19,7 +19,7 @@ public class UserService {
     }
 
     public User registerUser(String name, String email, String phone, String password) {
-        User user = new User(name, email, phone, password, "PLAYER", "ACTIVE");
+        User user = new User(name, email, phone, password, "ADMIN", "ACTIVE");
         return userRepository.save(user);
     }
 
@@ -61,14 +61,11 @@ public class UserService {
         if (request.getName() != null) {
             user.setName(request.getName());
         }
-        if (request.getEmail() != null) {
-            user.setEmail(request.getEmail());
-        }
         if (request.getPhone() != null) {
             user.setPhone(request.getPhone());
         }
-
         return userRepository.save(user);
     }
+
 }
 

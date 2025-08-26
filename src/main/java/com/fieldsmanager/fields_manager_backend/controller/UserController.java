@@ -66,16 +66,12 @@ public class UserController {
 
 
     @PutMapping("/update")
-    public User updateUser(@RequestBody User updatedUser) {
-        User existingUser = userRepository.findByEmail(updatedUser.getEmail())
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "User not found"));
-
-        existingUser.setName(updatedUser.getName());
-        existingUser.setPassword(updatedUser.getPassword());
-
-        return userRepository.save(existingUser);
+    public User updateProfile(Authentication authentication,
+                              @RequestBody UpdateProfileRequest request) {
+        String email = authentication.getName();
+        return userService.updateProfile(email, request);
     }
+
 
 }
 
