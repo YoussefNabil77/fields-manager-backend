@@ -2,6 +2,7 @@ package com.fieldsmanager.fields_manager_backend.security;
 //
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,6 +25,10 @@ public class SecurityConfig {
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**" , "/error").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/fields/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/fields/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/fields/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/fields/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
