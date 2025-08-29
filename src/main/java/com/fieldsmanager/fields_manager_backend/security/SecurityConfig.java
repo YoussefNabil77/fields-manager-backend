@@ -28,6 +28,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/fields/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/fields/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/fields/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/field-slots/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/field-slots/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/field-slots/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/field-slots/**").permitAll()
+
                         .requestMatchers(HttpMethod.GET, "/api/fields/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/enquiries/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/enquiries/**").permitAll()
