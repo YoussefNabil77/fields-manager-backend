@@ -13,13 +13,12 @@ public class BookingDTO {
     private String status;
 
     public BookingDTO(Integer id, Integer userId, Integer teamId, Integer fieldSlotId,
-                      LocalDate date, BigDecimal price, String status) {
+                      LocalDate date, String status) {
         this.id = id;
         this.userId = userId;
         this.teamId = teamId;
         this.fieldSlotId = fieldSlotId;
         this.date = date;
-        this.price = price;
         this.status = status;
     }
 

@@ -11,6 +11,7 @@ import com.fieldsmanager.fields_manager_backend.repository.TeamRepository;
 import com.fieldsmanager.fields_manager_backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,8 +49,12 @@ public class BookingService {
         booking.setTeam(team);
         booking.setFieldSlots(fieldSlot);
         booking.setDate(bookingDTO.getDate());
-        booking.setPrice(bookingDTO.getPrice());
         booking.setStatus(bookingDTO.getStatus());
+
+        // price calculation
+        long hours = java.time.Duration.between(fieldSlot.getFromTime(), fieldSlot.getToTime()).toHours();
+        BigDecimal totalPrice = fieldSlot.getPricePerHour().multiply(BigDecimal.valueOf(hours));
+        booking.setPrice(totalPrice);
 
         // save booking
         Booking savedBooking = bookingRepository.save(booking);
