@@ -33,6 +33,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/field-slots/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/field-slots/**").permitAll()
 
+                        .requestMatchers(HttpMethod.POST, "/auth/api/bookings/create").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/auth/api/bookings/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/auth/api/bookings/{id}/decision").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/auth/api/bookings/{id}/status").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/auth/api/bookings/**").hasRole("ADMIN")
+
+
                         .requestMatchers(HttpMethod.GET, "/api/fields/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/enquiries/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/enquiries/**").permitAll()
