@@ -58,8 +58,33 @@ public class ReviewService {
                 .stream().map(this::mapToResponse).collect(Collectors.toList());
     }
 
+    public ReviewResponse updateReview(Integer reviewId, ReviewRequest request) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("Review not found"));
+
+        review.setRating(request.getRating());
+        if (request.getComment() != null) {
+            review.setComment(request.getComment());
+        }
+
+        if (request.getComment() != null) {
+            review.setComment(request.getComment());
+        }
+
+        Review updated = reviewRepository.save(review);
+        return mapToResponse(updated);
+    }
+
+
+    public void deleteReview(Integer reviewId) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("Review not found"));
+        reviewRepository.delete(review);
+    }
+
+
     private ReviewResponse mapToResponse(Review review) {
-        // بدل ReviewResponse.builder()
+
         return new ReviewResponse(
                 review.getId(),
                 review.getBooking().getId(),

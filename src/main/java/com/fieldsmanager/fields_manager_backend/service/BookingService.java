@@ -87,6 +87,38 @@ public class BookingService {
 
         return dto;
     }
+    public BookingDTO updateBookingStatus(Integer id, String status) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+        booking.setStatus(status);
+        Booking saved = bookingRepository.save(booking);
+
+        BookingDTO dto = new BookingDTO();
+        dto.setId(saved.getId());
+        dto.setUserId(saved.getPlayer().getId());
+        dto.setTeamId(saved.getTeam().getId());
+        dto.setFieldSlotId(saved.getFieldSlots().getId());
+        dto.setDate(saved.getDate());
+        dto.setPrice(saved.getPrice());
+        dto.setStatus(saved.getStatus());
+        return dto;
+    }
+    public List<BookingDTO> getBookingHistory(Integer userId) {
+        List<Booking> bookings = bookingRepository.findByPlayerId(userId);
+
+        return bookings.stream().map(b -> {
+            BookingDTO dto = new BookingDTO();
+            dto.setId(b.getId());
+            dto.setUserId(b.getPlayer().getId());
+            dto.setTeamId(b.getTeam().getId());
+            dto.setFieldSlotId(b.getFieldSlots().getId());
+            dto.setDate(b.getDate());
+            dto.setPrice(b.getPrice());
+            dto.setStatus(b.getStatus());
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
 
 
 }

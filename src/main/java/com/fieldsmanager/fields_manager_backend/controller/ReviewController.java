@@ -33,4 +33,20 @@ public class ReviewController {
     public ResponseEntity<List<ReviewResponse>> getReviewsByUser(@PathVariable Integer userId) {
         return ResponseEntity.ok(reviewService.getReviewsByUser(userId));
     }
+
+
+    @PutMapping("/update/{reviewId}")
+    public ResponseEntity<ReviewResponse> updateReview(
+            @PathVariable Integer reviewId,
+            @RequestBody ReviewRequest request
+    ) {
+        return ResponseEntity.ok(reviewService.updateReview(reviewId, request));
+    }
+
+
+    @DeleteMapping("/delete/{reviewId}")
+    public ResponseEntity<Void> deleteReview(@PathVariable Integer reviewId) {
+        reviewService.deleteReview(reviewId);
+        return ResponseEntity.noContent().build();
+    }
 }
