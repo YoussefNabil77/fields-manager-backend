@@ -63,15 +63,17 @@ Players can create teams, book fields, track their bookings, and submit reviews,
    git clone https://github.com/YoussefNabil77/fields-manager-backend.git
    cd fields-manager-backend
 2.Configure the database in application.properties
-  spring.application.name=fields-manager-backend
-  spring.datasource.url=jdbc:mysql://localhost:3306/field_manager?useSSL=false&serverTimezone=UTC
-  spring.datasource.username=your_username
-  spring.datasource.password=your_password
-  spring.jpa.hibernate.ddl-auto=update
+
+    spring.application.name=fields-manager-backend
+    spring.datasource.url=jdbc:mysql://localhost:3306/field_manager?useSSL=false&serverTimezone=UTC
+    spring.datasource.username=your_username
+    spring.datasource.password=your_password
+    spring.jpa.hibernate.ddl-auto=update
 
 3.Run the project (via IntelliJ IDEA or command line)
-  mvn spring-boot:run
-  http://localhost:9090/swagger-ui.html
+
+       mvn spring-boot:run
+      http://localhost:9090/swagger-ui.html
 
   ## Screenshots 
 
@@ -79,7 +81,7 @@ Players can create teams, book fields, track their bookings, and submit reviews,
   ![Swagger Screenshot](images/swagger.jpg)
 
   Database Schema
-  ![Database Schema](images/database-schema.jpg)
+  ![Database Schema](images/ERD.jpg)
 
 
 
