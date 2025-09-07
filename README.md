@@ -51,8 +51,8 @@ Players can create teams, book fields, track their bookings, and submit reviews,
 - Backend: Java, Spring Boot  
 - Database: MySQL, JPA/Hibernate  
 - Security: JWT Authentication & Authorization  
-- API Documentation: Swagger / Springdoc OpenAPI  
-- **IDE: IntelliJ IDEA  
+- API Documentation & Testing: Swagger / Springdoc OpenAPI / Postman
+- IDE: IntelliJ IDEA  
 
 
 
